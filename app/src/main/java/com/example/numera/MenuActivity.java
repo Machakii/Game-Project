@@ -50,6 +50,11 @@ public class MenuActivity extends AppCompatActivity {
         Button leaderBtn = findViewById(R.id.btnLeaderboards);
         Button helpBtn = findViewById(R.id.btnHelp);
 
+        startBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, GameActivity.class);
+            startActivity(intent);
+        });
+
         helpBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MenuActivity.this, HowtoPlay.class);
             startActivity(intent);
