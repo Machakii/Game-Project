@@ -1,12 +1,29 @@
 package com.example.numera;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.MediaController;
+import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.Player;
+import com.google.android.exoplayer2.ui.PlayerView;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -14,11 +31,40 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+        );
+
         setContentView(R.layout.activity_splash);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        PlayerView playerView = findViewById(R.id.playerView);
+
+        ExoPlayer player = new ExoPlayer.Builder(this).build();
+        playerView.setPlayer(player);
+
+        Uri videoUri = Uri.parse(
+                "android.resource://" + getPackageName() + "/" + R.raw.vid
+        );
+
+        MediaItem mediaItem = MediaItem.fromUri(videoUri);
+        player.setMediaItem(mediaItem);
+        player.setRepeatMode(Player.REPEAT_MODE_ALL);
+        player.prepare();
+        player.play();
+
+        new Handler().postDelayed(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(SplashActivity.this, MenuActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                }, 3000
+        );
+
+
     }
 }
