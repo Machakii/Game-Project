@@ -35,11 +35,9 @@ public class SplashActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
-
         setContentView(R.layout.activity_splash);
 
         PlayerView playerView = findViewById(R.id.playerView);
-
         ExoPlayer player = new ExoPlayer.Builder(this).build();
         playerView.setPlayer(player);
 

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Numera</string>
-    <string name="quote">"Think fast, Tap faster"</string>
+    <string name="game">NUMERA</string>
+    <string name="quote">"THINK FAST, TAP FASTER"</string>
+    <string name="start">START</string>
+    <string name="lead">LEADERBOARDS</string>
+    <string name="help">HOW TO PLAY</string>
 </resources>
