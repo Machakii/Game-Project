@@ -1,8 +1,12 @@
 package com.example.numera;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +21,7 @@ import com.google.android.exoplayer2.ui.PlayerView;
 
 public class MenuActivity extends AppCompatActivity {
 
+    public Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,15 @@ public class MenuActivity extends AppCompatActivity {
         player.prepare();
         player.play();
 
+        Button startBtn = findViewById(R.id.btnPlay);
+        Button leaderBtn = findViewById(R.id.btnLeaderboards);
+        Button helpBtn = findViewById(R.id.btnHelp);
+
+        helpBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, HowtoPlay.class);
+            startActivity(intent);
+        });
 
     }
+
 }

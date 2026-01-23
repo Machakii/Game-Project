@@ -50,45 +50,44 @@
 
             <Button
                 android:id="@+id/btnPlay"
-                android:layout_width="match_parent"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:text="Start"
+                android:text="@string/start"
                 android:fontFamily="@font/press_start_2p"
                 android:backgroundTint="@color/title_color"
                 android:textColor="@color/dark_gray"
                 android:layout_marginTop="100dp"
                 android:layout_marginBottom="50dp"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="80dp"
-                android:padding="15dp"
+                android:textSize="18sp"
+                android:padding="10dp"
                 app:cornerRadius="24dp"/>
 
             <Button
                 android:id="@+id/btnLeaderboards"
-                android:layout_width="match_parent"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:text="Leaderboards"
+                android:text="@string/lead"
                 android:fontFamily="@font/press_start_2p"
                 android:backgroundTint="@color/title_color"
                 android:textColor="@color/dark_gray"
                 android:layout_marginBottom="50dp"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="80dp"
-                android:padding="15dp"
+
+                android:textSize="18sp"
+                android:padding="10dp"
                 app:cornerRadius="24dp"/>
 
             <Button
                 android:id="@+id/btnHelp"
-                android:layout_width="match_parent"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:text="How to Play"
+                android:text="@string/help"
                 android:fontFamily="@font/press_start_2p"
                 android:backgroundTint="@color/title_color"
                 android:textColor="@color/dark_gray"
                 android:layout_marginBottom="100dp"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="80dp"
-                android:padding="15dp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:padding="10dp"
                 app:cornerRadius="24dp"/>
         </LinearLayout>
 

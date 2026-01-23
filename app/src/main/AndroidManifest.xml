@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Numera">
         <activity
+            android:name=".HowtoPlay"
+            android:exported="false" />
+        <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity

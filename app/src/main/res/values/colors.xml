@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="title_color">#00f9ff</color>
     <color name="dark_gray">#070a0a</color>
+
+    <color name="glass_bg">#902A4555</color>
+    <color name="script_text">#5CE1E6</color>
+
 </resources>

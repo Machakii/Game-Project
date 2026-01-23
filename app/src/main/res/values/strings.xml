@@ -5,4 +5,16 @@
     <string name="start">START</string>
     <string name="lead">LEADERBOARDS</string>
     <string name="help">HOW TO PLAY</string>
+    <string name="back">BACK</string>
+
+
+    //how to play
+    <string name="first_script">-Solve math problems by clicking the right tiles on the screen within the time limit</string>
+    <string name="second_script">-The game will stop if you click the wrong answer or the time limit is reached.</string>
+    <string name="third_script">-The game will progress faster when you a certain points is reached.</string>
+    <string name="fourth_script">-Easy 10 to 50 points, Medium 50 to 100 points and Hard is 100points to 200points.</string>
+    <string name="last_script">-Extreme level 200points to failure.</string>
+
+
+
 </resources>
