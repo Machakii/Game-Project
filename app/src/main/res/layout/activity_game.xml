@@ -114,6 +114,7 @@
                     android:textColor="@color/black"
                     android:backgroundTint="@color/title_color"
                     app:layout_column="0"
+                    android:onClick="submitAnswer"
                     app:layout_row="0" />
 
                 <Button
@@ -127,6 +128,7 @@
                     android:textColor="@color/black"
                     android:backgroundTint="@color/title_color"
                     app:layout_column="1"
+                    android:onClick="submitAnswer"
                     app:layout_row="0" />
 
                 <Button
@@ -140,6 +142,7 @@
                     android:textSize="40sp"
                     android:backgroundTint="@color/title_color"
                     app:layout_column="0"
+                    android:onClick="submitAnswer"
                     app:layout_row="1" />
 
                 <Button
@@ -153,6 +156,7 @@
                     android:backgroundTint="@color/title_color"
                     android:textColor="@color/black"
                     app:layout_column="1"
+                    android:onClick="submitAnswer"
                     app:layout_row="1" />
             </androidx.gridlayout.widget.GridLayout>
 
