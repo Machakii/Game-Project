@@ -22,11 +22,14 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
 
 
+
+
+
     private Integer firstNumber = 0, secondNumber = 0;
 
-    private String diff = "", question = "";
-    private Integer score = 0;
-    private int delay = 1000;
+    private String diff = "Easy", question = "";
+    private Integer score = 0, dip = 9;
+    private int delay = 10000;
     int progress;
     private TextView txtQuestion, txtScore, txtDiff = null;
     private Button btnOne, btnTwo, btnThree, btnFour = null;
@@ -68,15 +71,45 @@ public class GameActivity extends AppCompatActivity {
         setNumber();
 
 
+    }
 
+    private void setTimer(){
+
+        progBar.setProgress(0);
+        handler.removeCallbacksAndMessages(null);
+        final int[] counter  = {1};
+        handler.postDelayed(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        int progress = counter[0] * 5;
+                        progBar.setProgress(progress);
+                        if(progress == 100){
+                            exit(0);
+                        }
+                        counter[0]++;
+                        handler.postDelayed(this, delay);
+                    }
+                }, delay
+        );
     }
 
     private void setNumber(){
-        int dummy1 = (int) (Math.random() * 10);
-        int dummy2 = (int) (Math.random() * 10);
-        int dummy3 = (int) (Math.random() * 10);
-        firstNumber = (int) (Math.random() * 10);
-        secondNumber = (int) (Math.random() * 10);
+
+        int dummy1 = (int) (Math.random() * dip);
+        int dummy2 = (int) (Math.random() * dip);
+        int dummy3 = (int) (Math.random() * dip);
+        firstNumber = (int) (Math.random() * dip);
+        secondNumber = (int) (Math.random() * dip);
+
+        switch (diff){
+            case "Medium":
+                dip = 13;
+            case "Hard":
+                dip = 20;
+            case "Extreme":
+                dip = 30;
+        }
 
         String sign = getRandomSign();
 
@@ -134,15 +167,24 @@ public class GameActivity extends AppCompatActivity {
         //boolean result = textQuestion.getText().equals(btn.getText());
         boolean result = String.valueOf(answer).equalsIgnoreCase(btn.getText().toString());
         if(result){
-            // Correct Answer
+            txtDiff.setText(diff);
             score += 10;
             txtScore.setText(String.valueOf(score));
+            if(score == 50){
+                diff = "Medium";
+            }else if(score == 100){
+                diff = "Hard";
+            }else if(score >= 200){
+                diff = "Extreme";
+            }
             setNumber(); // Generate NEW Question
         } else {
             // Game Over
             exit(0);
         }
     }
+
+
 
 
 }
