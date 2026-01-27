@@ -2,6 +2,7 @@ package com.example.numera;
 
 import static java.lang.System.exit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -85,7 +86,7 @@ public class GameActivity extends AppCompatActivity {
                         int progress = counter[0] * 5;
                         progBar.setProgress(progress);
                         if(progress == 100){
-                            exit(0);
+                            exit();
                         }
                         counter[0]++;
                         handler.postDelayed(this, delay);
@@ -180,8 +181,15 @@ public class GameActivity extends AppCompatActivity {
             setNumber(); // Generate NEW Question
         } else {
             // Game Over
-            exit(0);
+            exit();
         }
+    }
+
+    private void exit() {
+        handler.removeCallbacksAndMessages(null);
+        Intent intent = new Intent(this, GameOverActivity.class);
+        intent.putExtra("score", String.valueOf(score));
+        this.startActivity(intent);
     }
 
 
