@@ -15,7 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center">
 
         <LinearLayout
             android:layout_marginTop="40dp"
@@ -83,7 +84,7 @@
                 android:textAlignment="center"
                 android:fontFamily="@font/press_start_2p"
                 android:textColor="@color/title_color"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <ProgressBar
                 android:id="@+id/progressBar"

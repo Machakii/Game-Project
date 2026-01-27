@@ -2,7 +2,7 @@ package com.example.numera;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.Button;
 
@@ -12,8 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-
-public class HowtoPlay extends AppCompatActivity {
+public class LeaderboardsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class HowtoPlay extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
-        setContentView(R.layout.activity_howto_play);
+        setContentView(R.layout.activity_leaderboards);
 
 
         Button bckBtn = findViewById(R.id.btnBack);
@@ -31,8 +30,6 @@ public class HowtoPlay extends AppCompatActivity {
             startActivity(new Intent(this, MenuActivity.class));
         });
 
+
     }
-
-
-
 }

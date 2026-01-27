@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/open"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,9 +115,7 @@
             android:fontFamily="@font/press_start_2p"
             android:backgroundTint="@color/title_color"
             android:textColor="@color/dark_gray"
-            android:layout_marginBottom="100dp"
-            android:layout_marginTop="60dp"
-
+            android:layout_marginTop="50dp"
             android:padding="10dp"
             app:cornerRadius="24dp"/>
     </LinearLayout>

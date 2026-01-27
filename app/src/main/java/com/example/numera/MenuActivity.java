@@ -32,19 +32,6 @@ public class MenuActivity extends AppCompatActivity {
         );
         setContentView(R.layout.activity_menu);
 
-        PlayerView playerView = findViewById(R.id.playerView);
-        ExoPlayer player = new ExoPlayer.Builder(this).build();
-        playerView.setPlayer(player);
-
-        Uri videoUri = Uri.parse(
-                "android.resource://" + getPackageName() + "/" + R.raw.vid
-        );
-
-        MediaItem mediaItem = MediaItem.fromUri(videoUri);
-        player.setMediaItem(mediaItem);
-        player.setRepeatMode(Player.REPEAT_MODE_ALL);
-        player.prepare();
-        player.play();
 
         Button startBtn = findViewById(R.id.btnPlay);
         Button leaderBtn = findViewById(R.id.btnLeaderboards);
@@ -52,6 +39,11 @@ public class MenuActivity extends AppCompatActivity {
 
         startBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MenuActivity.this, GameActivity.class);
+            startActivity(intent);
+        });
+
+        leaderBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, LeaderboardsActivity.class);
             startActivity(intent);
         });
 
