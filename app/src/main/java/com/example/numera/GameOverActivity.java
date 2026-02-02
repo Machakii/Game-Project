@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -16,6 +17,8 @@ public class GameOverActivity extends AppCompatActivity {
 
     Button btnPlayAgain, btnHome;
     TextView score;
+    EditText txtName;
+
 
 
     @Override
@@ -31,22 +34,33 @@ public class GameOverActivity extends AppCompatActivity {
         btnPlayAgain = findViewById(R.id.btnPlayAgain);
         btnHome = findViewById(R.id.btnHome);
         score = findViewById(R.id.score);
+        txtName = findViewById(R.id.editName);
 
         Intent intent = getIntent();
         String scored = intent.getStringExtra("score");
+        int scores = Integer.parseInt(scored);
 
         score.setText(scored);
 
         btnPlayAgain.setOnClickListener(view -> {
-            startActivity(new Intent(GameOverActivity.this, GameActivity.class));
+            String playerName = txtName.getText().toString().trim();
+            if (playerName.isEmpty()) playerName = "Player"; // default
+
+            LeaderboardManager.saveScore(this, playerName, scores);
+
+            startActivity(new Intent(this, GameActivity.class));
             finish();
         });
-
-
 
         btnHome.setOnClickListener(view -> {
-            startActivity(new Intent(GameOverActivity.this, MenuActivity.class));
+            String playerName = txtName.getText().toString().trim();
+            if (playerName.isEmpty()) playerName = "Player"; // default
+
+            LeaderboardManager.saveScore(this, playerName, scores);
+
+            startActivity(new Intent(this, MenuActivity.class));
             finish();
         });
+
     }
 }

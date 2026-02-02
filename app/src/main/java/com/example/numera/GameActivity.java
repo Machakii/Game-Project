@@ -1,7 +1,5 @@
 package com.example.numera;
 
-import static java.lang.System.exit;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,23 +12,21 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class GameActivity extends AppCompatActivity {
-
-
-
 
 
     private Integer firstNumber = 0, secondNumber = 0;
 
     private String diff = "Easy", question = "";
     private Integer score = 0, dip = 9;
-    private int delay = 10000;
     int progress;
     private TextView txtQuestion, txtScore, txtDiff = null;
     private Button btnOne, btnTwo, btnThree, btnFour = null;
@@ -41,6 +37,7 @@ public class GameActivity extends AppCompatActivity {
     private static final String Add = "+";
     private static final String Divide = "/";
     private static int answer = 0;
+    private static int ms = 200;
 
 
 
@@ -74,7 +71,7 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void setTimer(){
+    private void setTimer(int delay){
 
         progBar.setProgress(0);
         handler.removeCallbacksAndMessages(null);
@@ -83,9 +80,11 @@ public class GameActivity extends AppCompatActivity {
                 new Runnable() {
                     @Override
                     public void run() {
-                        int progress = counter[0] * 5;
+                        int progress = counter[0];
+
                         progBar.setProgress(progress);
                         if(progress == 100){
+                            ms = 200;
                             exit();
                         }
                         counter[0]++;
@@ -96,10 +95,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setNumber(){
-
-        int dummy1 = (int) (Math.random() * dip);
-        int dummy2 = (int) (Math.random() * dip);
-        int dummy3 = (int) (Math.random() * dip);
+        setTimer(ms);
         firstNumber = (int) (Math.random() * dip);
         secondNumber = (int) (Math.random() * dip);
 
@@ -125,6 +121,9 @@ public class GameActivity extends AppCompatActivity {
                 }
                 break;
             case Multiply:
+                // prevent 0
+                if (firstNumber == 0) firstNumber = 1;
+                if (secondNumber == 0) secondNumber = 1;
                 answer = firstNumber * secondNumber;
                 txtQuestion.setText(String.valueOf(firstNumber) + Multiply + String.valueOf(secondNumber));
                 break;
@@ -133,22 +132,39 @@ public class GameActivity extends AppCompatActivity {
                 txtQuestion.setText(String.valueOf(firstNumber) + Add + String.valueOf(secondNumber));
                 break;
             case Divide:
+                // prevent 0
+                if (firstNumber == 0) firstNumber = 1;
+                if (secondNumber == 0) secondNumber = 1;
+
+                // para naman divisible talaga
+                int multiplier = (int) (Math.random() * dip) + 1;
+
                 if (firstNumber <= secondNumber){
-                    answer = secondNumber / firstNumber;
+                    secondNumber = firstNumber * multiplier;
+
+                    answer = multiplier;
                     txtQuestion.setText(String.valueOf(secondNumber) + Divide + String.valueOf(firstNumber));
                 }
                 else {
-                    answer = firstNumber / secondNumber;
+                    firstNumber = secondNumber * multiplier;
+
+                    answer = multiplier;
                     txtQuestion.setText(String.valueOf(firstNumber) + Divide + String.valueOf(secondNumber));
                 }
+                break;
         }
 
+        Set<Integer> uniqueNumbers = new HashSet<>();
+        uniqueNumbers.add(answer);  // include correct answer first
 
+        while (uniqueNumbers.size() < 4) {
+            int rand = (int) (Math.random() * dip) + 1;
+            uniqueNumbers.add(rand); // Set prevents duplicates
+        }
 
-        List<Button> buttons = Arrays.asList(btnOne, btnTwo, btnThree, btnFour);
-        List<Integer> numbers = Arrays.asList(answer, dummy1, dummy2, dummy3);
-
+        List<Integer> numbers = new ArrayList<>(uniqueNumbers);
         Collections.shuffle(numbers);
+        List<Button> buttons = Arrays.asList(btnOne, btnTwo, btnThree, btnFour);
 
         for (int i = 0; i < buttons.size(); i++) {
             buttons.get(i).setText(String.valueOf(numbers.get(i)));
@@ -165,7 +181,6 @@ public class GameActivity extends AppCompatActivity {
 
     public void submitAnswer(View view){
         Button btn = (Button) view;
-        //boolean result = textQuestion.getText().equals(btn.getText());
         boolean result = String.valueOf(answer).equalsIgnoreCase(btn.getText().toString());
         if(result){
             txtDiff.setText(diff);
@@ -173,26 +188,29 @@ public class GameActivity extends AppCompatActivity {
             txtScore.setText(String.valueOf(score));
             if(score == 50){
                 diff = "Medium";
+                ms = 80;
             }else if(score == 100){
                 diff = "Hard";
+                ms = 50;
             }else if(score >= 200){
                 diff = "Extreme";
+                ms = 30;
             }
             setNumber(); // Generate NEW Question
         } else {
             // Game Over
+            ms = 200;
             exit();
         }
     }
 
     private void exit() {
         handler.removeCallbacksAndMessages(null);
+
+
+
         Intent intent = new Intent(this, GameOverActivity.class);
         intent.putExtra("score", String.valueOf(score));
         this.startActivity(intent);
     }
-
-
-
-
 }
