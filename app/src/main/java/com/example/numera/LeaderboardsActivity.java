@@ -33,7 +33,10 @@ public class LeaderboardsActivity extends AppCompatActivity {
 
         Button bckBtn = findViewById(R.id.btnBack);
         bckBtn.setOnClickListener(v -> {
+            SFXManager.click();
             startActivity(new Intent(this, MenuActivity.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            finish();
         });
 
         txtScore1 = findViewById(R.id.score1);

@@ -1,6 +1,7 @@
 package com.example.numera;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -43,22 +44,32 @@ public class GameOverActivity extends AppCompatActivity {
         score.setText(scored);
 
         btnPlayAgain.setOnClickListener(view -> {
+            SFXManager.click();
+            MusicManager.stop();
+            MusicManager.start(GameOverActivity.this, R.raw.bg_game);
+
             String playerName = txtName.getText().toString().trim();
             if (playerName.isEmpty()) playerName = "Player"; // default
 
             LeaderboardManager.saveScore(this, playerName, scores);
 
             startActivity(new Intent(this, GameActivity.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             finish();
         });
 
         btnHome.setOnClickListener(view -> {
+            SFXManager.click();
+            MusicManager.stop();
+            MusicManager.start(GameOverActivity.this, R.raw.bg_menu);
+
             String playerName = txtName.getText().toString().trim();
             if (playerName.isEmpty()) playerName = "Player"; // default
 
             LeaderboardManager.saveScore(this, playerName, scores);
 
             startActivity(new Intent(this, MenuActivity.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             finish();
         });
 

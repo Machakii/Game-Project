@@ -98,6 +98,7 @@ public class GameActivity extends AppCompatActivity {
         setTimer(ms);
         firstNumber = (int) (Math.random() * dip);
         secondNumber = (int) (Math.random() * dip);
+        txtDiff.setText(diff);
 
         switch (diff){
             case "Medium":
@@ -183,22 +184,26 @@ public class GameActivity extends AppCompatActivity {
         Button btn = (Button) view;
         boolean result = String.valueOf(answer).equalsIgnoreCase(btn.getText().toString());
         if(result){
-            txtDiff.setText(diff);
+            SFXManager.click();
             score += 10;
             txtScore.setText(String.valueOf(score));
             if(score == 50){
+                SFXManager.changeDifficulty();
                 diff = "Medium";
                 ms = 80;
             }else if(score == 100){
+                SFXManager.changeDifficulty();
                 diff = "Hard";
                 ms = 50;
             }else if(score >= 200){
+                SFXManager.changeDifficulty();
                 diff = "Extreme";
                 ms = 30;
             }
             setNumber(); // Generate NEW Question
         } else {
             // Game Over
+            SFXManager.wrong();
             ms = 200;
             exit();
         }
@@ -206,11 +211,13 @@ public class GameActivity extends AppCompatActivity {
 
     private void exit() {
         handler.removeCallbacksAndMessages(null);
-
-
-
+        MusicManager.stop();
+        if(score > 100) MusicManager.start(GameActivity.this, R.raw.gm_over2);
+        else MusicManager.start(GameActivity.this, R.raw.gm_over1);
         Intent intent = new Intent(this, GameOverActivity.class);
         intent.putExtra("score", String.valueOf(score));
         this.startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finish();
     }
 }

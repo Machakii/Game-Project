@@ -27,6 +27,7 @@ import com.google.android.exoplayer2.ui.PlayerView;
 
 public class SplashActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,12 +52,16 @@ public class SplashActivity extends AppCompatActivity {
         player.prepare();
         player.play();
 
+
         new Handler().postDelayed(
                 new Runnable() {
                     @Override
                     public void run() {
+
+                        MusicManager.start(SplashActivity.this, R.raw.bg_menu);
                         Intent intent = new Intent(SplashActivity.this, MenuActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         finish();
 
                     }
